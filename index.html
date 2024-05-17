@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+       <link rel='icon' type='image/x-icon' href="/icon.png" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta content='Dictionary App' property='og:title' />
+      <meta content='Search for the meaning, synonym, and antonym of a word' property='og:description'  />
+     <meta content='/home' property='og:url' />
+       <meta property='og:site_name' content='Dictionary'>
+      <meta content='/icon.png' property='og:image' />
+      <meta content='#2f3136'  name='theme-color'/>
+ 
+    
+    <title>Dictionary</title>
+     <style>
+         html{
+            scroll-behavior: smooth;
+         }
+
+         *{
+           word-wrap: break-word;
+         }
+
+         body {
+             font-family: Arial, sans-serif;
+             text-align: center;
+           background-image: url("/icon.png");
+           background-color: #76ABAE;
+         }
+
+         header {
+             background-color: #333;
+             color: white;
+             padding: 10px 0;
+            border-radius: 10px;
+         }
+
+         nav {
+             background-color: #444;
+             padding: 10px 0;
+           border-radius: 10px;
+         }
+
+         nav a {
+           color: #fff;
+           text-decoration: none;
+           padding: 0 15px;
+         }
+
+         input[type="text"] {
+           font-size: 23px;
+             width: 60%;
+             padding: 10px;
+             margin: 10px;
+             border: 1px solid #ccc;
+             border-radius: 5px;
+         }
+
+
+
+         .scrollbar {
+           height: 500px;
+           overflow-y: scroll;
+           padding: 10px;
+         max-width: 800px;
+         margin: 20px auto;
+         background-color: #f4f4f4;
+          text-align: justify;
+           font-size: 20px;
+           overflow: auto;
+           border-radius: 5px;
+             
+         }
+
+         .explorewords{
+         font-size: 23px;
+         text-align: center;
+           color: white;
+         }
+
+         .letters {
+             background-color: #444;
+             padding: 10px 0;
+           border-radius: 10px;
+             color: white;
+             font-size: 20px;
+             text-decoration: none;
+         }
+        
+         div a {
+              text-decoration: none;
+             color: #fff;
+         }
+
+         #logo{
+          width: 40px;
+          height: 40px;
+         }
+
+         #buttonsearch{
+           border-radius: 10px;
+           width: 60px;
+           padding: 10px;
+         }
+
+         .highlight{
+           background-color: #333;
+           color: white;
+           size:30px;
+           font-size: 23px;
+           border-radius: 10px;
+         }
+
+     </style>
+   
+
+
+</head>
+
+<body>
+
+    <header> 
+        <h1><img id="logo" src="/icon.png"> Dictionary</h1>
+    </header>
+
+    <nav>
+        <a href="/home">Home</a> | <a href="/about">About</a>
+    </nav>
+
+         <div class="search">
+             <form name="word" action="/results">
+        <input id="boxsearch" type="text" placeholder="Search for a word"  value="" name="word" required> <button id='buttonsearch' onclick="searchword()">🔍</button> </form>
+          </div>
+
+
+<div class="letters"> 
+     <div class="explorewords" onclick="alert('Tap the letters!')"> <strong> Explore Words </strong> </div>
+
+    <a href="#A" onclick="explore('A')"> A </a> &nbsp
+    <a href="#B" onclick="explore('B')"> B </a>&nbsp
+    <a href="#C" onclick="explore('C')"> C </a> &nbsp
+    <a href="#D" onclick="explore('D')"> D </a>&nbsp
+    <a href="#E" onclick="explore('E')"> E </a>&nbsp
+    <a href="#F" onclick="explore('F')"> F </a> &nbsp
+    <a href="#G" onclick="explore('G')"> G </a>&nbsp
+    <a href="#H" onclick="explore('H')"> H </a>&nbsp
+    <a href="#I" onclick="explore('I')"> I </a> &nbsp
+    <a href="#J" onclick="explore('J')"> J </a>&nbsp
+    <a href="#K" onclick="explore('K')"> K </a>&nbsp
+    <a href="#L" onclick="explore('L')"> L </a> &nbsp
+    <a href="#M" onclick="explore('M')"> M </a>&nbsp
+    <a href="#N" onclick="explore('N')"> N </a>&nbsp
+    <a href="#O" onclick="explore('O')"> O </a> &nbsp
+    <a href="#P" onclick="explore('P')"> P </a>&nbsp
+    <a href="#Q" onclick="explore('Q')"> Q </a>&nbsp
+    <a href="#R" onclick="explore('R')"> R </a> &nbsp
+    <a href="#S" onclick="explore('S')"> S </a>&nbsp
+    <a href="#T" onclick="explore('T')"> T </a>&nbsp
+    <a href="#U" onclick="explore('U')"> U </a> &nbsp
+    <a href="#V" onclick="explore('V')"> V </a>&nbsp
+    <a href="#W" onclick="explore('W')"> W </a>&nbsp
+    <a href="#X" onclick="explore('X')"> X </a> &nbsp
+    <a href="#Y" onclick="explore('Y')"> Y </a>&nbsp
+    <a href="#Z" onclick="explore('Z')"> Z </a>&nbsp
+
+
+</div>
+  <div class="scrollbar" id="scrollbar">Click the image to load all the words! Loading may take a while<img src="/icon.png" style="width: 100%;" onclick="explore('open')">
+  </div>
+
+
+    
+    <script>
+        function searchword(){
+            var word = document.getElementById("boxsearch").value;
+            if (word != ""){
+                window.location.href = "/results?word="+word;
+
+            }
+            else{
+                alert("The search bar is empty!\nThere is nothing to search");
+            }
+            
+        }
+
+        function httpGet(url) {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url, false); 
+          xhr.send();
+        return xhr.responseText;
+        }
+
+        
+        
+    function notify(){
+         document.getElementById("scrollbar").innerHTML = "LOADING..., MAY TAKE A WHILE";
+    }
+       async function explore(letter){
+    var inner = document.getElementById("scrollbar").innerHTML;
+    var conditions = inner.startsWith("Click the image to load all the words! Loading may take a while");
+                
+ if (conditions) {
+  
+
+   
+     notify();
+      alert("Loading\nThis may take a while");
+     
+    var contents = httpGet("/allwords");
+     document.getElementById("scrollbar").innerHTML = contents;
+            alert("Loaded and Done!\nThanks for waiting!");
+               }
+
+        if (letter != 'open') {
+            
+            const element = document.getElementById(letter);
+            if (element){element.scrollIntoView();}
+            else {alert("If you want to explore more words, tap the HOME button!")}
+        }
+               
+           }
+        
+        //alert()
+        
+      
+
+    </script>
+
+</body>
+</html>
