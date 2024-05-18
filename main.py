@@ -35,7 +35,7 @@ def file():
   
 @app.route("/about")
 def about():
-  content = "This Application is for the compliance of our subject HCI101 <br> Made by Canoy, Dupay, & Tabigne <br> Submitted to Sir Wilz<br>Source Code: <a style='color: black' href='https://github.com/frannytabigs/dictionary' target='/'>https://github.com/frannytabigs/dictionary</a><br>Contact Us through it as well!"
+  content = "This Application is for the compliance of our subject HCI101 <br> Made by Canoy, Dupay, & Tabigne <br> Submitted to Sir Wilz<br>Source Code: <a style='color: black' href='https://github.com/frannytabigs/dictionary' target='/'>https://github.com/frannytabigs/dictionary</a><br>Contact Us through <a href='https://www.facebook.com/franny.bolantoy' target='/'>FB!</a>"
   index = file_open("index.html")
   index = index.replace('Click the image to load all the words! Loading may take a while<img src="/icon.png" style="width: 100%;" onclick="explore(\'open\')">',content,1)
   return index
