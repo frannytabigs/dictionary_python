@@ -35,7 +35,7 @@ def file():
   
 @app.route("/about")
 def about():
-  content = "This Application is for the compliance of our subject HCI101 <br> Made by Canoy, Dupay, & Tabigne <br> Submitted to Sir Wilz<br>Source Code: <a style='color: black' href='https://github.com/frannytabigs/dictionary'>https://github.com/frannytabigs/dictionary</a><br>Contact Us through it as well!"
+  content = "This Application is for the compliance of our subject HCI101 <br> Made by Canoy, Dupay, & Tabigne <br> Submitted to Sir Wilz<br>Source Code: <a style='color: black' href='https://github.com/frannytabigs/dictionary' target='/'>https://github.com/frannytabigs/dictionary</a><br>Contact Us through it as well!"
   index = file_open("index.html")
   index = index.replace('Click the image to load all the words! Loading may take a while<img src="/icon.png" style="width: 100%;" onclick="explore(\'open\')">',content,1)
   return index
@@ -50,10 +50,12 @@ def results():
     content = search(word).replace("\n","<br>")
   except:
     content = "Oops, word not found <br>" + word.upper() + " not found"
-  
+  desc = content.replace('<br>','\n')
   index = file_open("index.html")
   index = index.replace('Click the image to load all the words! Loading may take a while<img src="/icon.png" style="width: 100%;" onclick="explore(\'open\')">',content,1)
   index = index.replace('placeholder="Search for a word"','placeholder="'+word.upper()+'"',1)
+  index = index.replace("content='Search for the meaning, synonym, and antonym of a word'", f"content='{desc}'",1)
+  index = index.replace("<title>Dictionary</title>",f"<title>Dictionary | {word.upper()}</title>",1)
   return index
   
 @app.route("/allwords")
